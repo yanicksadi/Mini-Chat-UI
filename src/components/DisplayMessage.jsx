@@ -1,5 +1,6 @@
-// import {useEffect,useState} from 'react'
+import {useEffect,useState} from 'react'
 import ChatMsg from './ChatMsg'
+import React from 'react';
 
 
 
@@ -8,7 +9,8 @@ import ChatMsg from './ChatMsg'
 
 function DisplayMessage(){
  
- const chatMessages = [{
+
+const [chatMessages, setChatMessages] = React.useState([{
     message: "hello chatbot",
     sender: "user",
     id: 'id1'
@@ -28,15 +30,27 @@ function DisplayMessage(){
   sender: "robot",
   id: 'id4'
   }
-]
+]);
+// const [chatMessages, setChatMessages] = array
+// const chatMessages = array[0];
+// const setChatMessages = array[1]
+
 
 function sendMessage(){
- chatMessages.push({
-  message: 'test',
-  sender: 'user',
-  id: crypto.randomUUID()
- });
- console.log(chatMessages)
+  setChatMessages([
+    ...chatMessages,
+    {
+      message: 'test',
+      sender: 'user',
+      id: crypto.randomUUID()
+    }
+]);
+}
+
+const [inputText,setInputText] = React.useState('')
+
+function saveInputText(event){
+  setInputText(event.target.value)
 }
 
  return(
@@ -45,6 +59,7 @@ function sendMessage(){
     <div>
       <input className="border flex-1 p-2 mt-10 ml-10" placeholder="send a message to Chatbot" 
         size="30"
+        onChange={saveInputText}
       />
 
       <button onClick={sendMessage} className="bg-green-600 border p-2 ml-2 rounded">
