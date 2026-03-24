@@ -1,4 +1,3 @@
-import MiniChat from './components/MiniChat'
 import ChatMsg from './components/ChatMsg'
 import DisplayMessage from './components/DisplayMessage'
 
@@ -21,7 +20,6 @@ function App(){
 
     return(
       <>
-        <MiniChat/>
         <ChatMsg/>
         <DisplayMessage/>
     </>

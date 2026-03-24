@@ -1,7 +1,9 @@
-import {useEffect,useState} from 'react'
+// import {useEffect,useState} from 'react'
 import chatbot from '../assets/chatbot.png'
 import user from '../assets/user.png'
-function ChatMessage({message, sender}){
+
+
+function ChatMsg({message, sender}){
 
   // const message = props.message;
   // const sender = props.sender;
@@ -29,4 +31,4 @@ function ChatMessage({message, sender}){
   );
 }
 
-export default ChatMessage
+export default ChatMsg
