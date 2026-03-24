@@ -1,6 +1,10 @@
 import ChatMsg from './components/ChatMsg'
 import DisplayMessage from './components/DisplayMessage'
 import React from 'react'
+
+
+
+
 function App(){
 
   const [chatMessages, setChatMessages] = React.useState([{
@@ -31,7 +35,7 @@ function App(){
 
     return(
       <>
-        <ChatMsg/>
+        {/* <ChatMsg/> */}
         <DisplayMessage/>
     </>
     
