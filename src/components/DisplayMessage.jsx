@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ChatMsg from './ChatMsg';
 
 
@@ -12,7 +12,29 @@ function DisplayMessage({ chatMessages, setChatMessages }) {
     setInputText(event.target.value);
   }
 
-  function sendMessage() {
+ 
+
+    useEffect(()=>{
+      if(chatMessages.length === 0) return;
+      
+      const lastMessage = chatMessages[chatMessages.length - 1];
+
+      if (lastMessage.sender === 'user'){
+        const response = Chatbot.getResponse(lastMessage.message);
+
+        setChatMessages(prev =>[
+          ...prev,
+          {
+            message: response,
+            sender: 'robot',
+            id: crypto.randomUUID()
+          }]);
+      }
+    }, [chatMessages]);
+  
+
+
+   function sendMessage() {
     const newChatMessages =  [
       ...chatMessages,
       {
@@ -24,20 +46,23 @@ function DisplayMessage({ chatMessages, setChatMessages }) {
 
     setChatMessages(newChatMessages);
 
-  const response = Chatbot.getResponse(inputText);
-  setChatMessages(
-      [
-      ...newChatMessages,
-      {
-        message: response,
-        sender: 'robot',
-        id: crypto.randomUUID()
-      }
-    ]
-    );
 
-  setInputText('')
+        // without UseEffect
+  // const response = Chatbot.getResponse(inputText);
+  // setChatMessages(
+  //     [
+  //     ...newChatMessages,
+  //     {
+  //       message: response,
+  //       sender: 'robot',
+  //       id: crypto.randomUUID()
+  //     }
+  //   ]
+  //   );
+      setInputText('')
   }
+
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
